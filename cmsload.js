@@ -66,14 +66,19 @@ function tagSearchInit(topLevelParent) {
   }
 
   //dynlist.style.display = 'none'
-  search.addEventListener("input", function () {
-    // Using 'input' instead of 'change' for better user experience
-    let searchQuery = this.value; // Value of the search field
+  if (!search.alreadyDone) {
+    search.addEventListener("input", function () {
+      // Using 'input' instead of 'change' for better user experience
+      let searchQuery = this.value; // Value of the search field
 
-    doSearch(searchQuery);
-  });
+      doSearch(searchQuery);
+    });
+    search.alreadyDone = true;
+  }
 
   checkboxes.forEach((checkbox) => {
+    if (checkbox.alreadyFlagged) return;
+    checkbox.alreadyFlagged = true;
     checkbox.addEventListener("change", function () {
       if (this.checked) {
         // Set display of the parent .w-dyn-item to none
