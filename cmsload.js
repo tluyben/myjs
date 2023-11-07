@@ -149,7 +149,7 @@ function tagSearchInit(topLevelParent) {
   });
 }
 
-(() => {
+(async () => {
   var qe = Object.create;
   var G = Object.defineProperty;
   var je = Object.getOwnPropertyDescriptor;
@@ -325,17 +325,7 @@ function tagSearchInit(topLevelParent) {
       let { animation: t } = e;
       if (t.import) return t.import;
       try {
-        t.import = import(ot);
-        var x = t.import;
-        let topLevelParents = document.querySelectorAll(
-          _tag("parent-container")
-        );
-
-        topLevelParents.forEach((parent) => {
-          tagSearchInit(parent);
-        });
-        ///return (t.import = import(ot)), t.import;
-        return x;
+        return (t.import = import(ot)), t.import;
       } catch (o) {
         A.alert(`${o}`, "error");
         return;
@@ -1330,5 +1320,10 @@ function tagSearchInit(topLevelParent) {
     version: be,
     attributeKey: h,
   });
-  fe();
+  await fe();
+  let topLevelParents = document.querySelectorAll(_tag("parent-container"));
+
+  topLevelParents.forEach((parent) => {
+    tagSearchInit(parent);
+  });
 })();
