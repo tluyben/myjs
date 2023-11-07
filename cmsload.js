@@ -325,7 +325,17 @@ function tagSearchInit(topLevelParent) {
       let { animation: t } = e;
       if (t.import) return t.import;
       try {
-        return (t.import = import(ot)), t.import;
+        t.import = import(ot);
+        var x = t.import;
+        let topLevelParents = document.querySelectorAll(
+          _tag("parent-container")
+        );
+
+        topLevelParents.forEach((parent) => {
+          tagSearchInit(parent);
+        });
+        ///return (t.import = import(ot)), t.import;
+        return x;
       } catch (o) {
         A.alert(`${o}`, "error");
         return;
@@ -1321,9 +1331,4 @@ function tagSearchInit(topLevelParent) {
     attributeKey: h,
   });
   fe();
-  let topLevelParents = document.querySelectorAll(_tag("parent-container"));
-
-  topLevelParents.forEach((parent) => {
-    tagSearchInit(parent);
-  });
 })();
