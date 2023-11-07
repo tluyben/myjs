@@ -1322,8 +1322,12 @@ function tagSearchInit(topLevelParent) {
   });
   await fe();
   let topLevelParents = document.querySelectorAll(_tag("parent-container"));
-
   topLevelParents.forEach((parent) => {
     tagSearchInit(parent);
   });
+  setInterval(() => {
+    topLevelParents.forEach((parent) => {
+      tagSearchInit(parent);
+    });
+  }, 400);
 })();
