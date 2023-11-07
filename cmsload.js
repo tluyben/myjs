@@ -1320,12 +1320,12 @@ function tagSearchInit(topLevelParent) {
       for (let n of o) n == null || n();
     });
   };
-  Se({
-    init: Ye,
-    version: be,
-    attributeKey: h,
-  });
-  await fe();
+  //   Se({
+  //     init: Ye,
+  //     version: be,
+  //     attributeKey: h,
+  //   });
+  //   await fe();
   let topLevelParents = document.querySelectorAll(_tag("parent-container"));
   topLevelParents.forEach((parent) => {
     tagSearchInit(parent);
