@@ -64,7 +64,13 @@ function tagSearchInit(topLevelParent) {
       if (texts.includes(label.textContent)) return;
       const q = searchQuery.trim().toLowerCase();
       if (
-        label.textContent.toLowerCase().startsWith(q) ||
+        // if the label.textContent split by ' ' or by , any of them, contains the q, then it's a hit too;
+        // this is for the case when the label has multiple words
+        label.textContent
+          .toLowerCase()
+          .split(" ")
+          .some((word) => word.startsWith(q)) ||
+        //label.textContent.toLowerCase().startsWith(q) ||
         (q.length >= 3 && label.textContent.toLowerCase().includes(q))
       ) {
         item.style.display = "";
