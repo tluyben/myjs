@@ -62,8 +62,10 @@ function tagSearchInit(topLevelParent) {
     labels.forEach((label) => {
       let item = label.closest(".w-dyn-item");
       if (texts.includes(label.textContent)) return;
+      const q = searchQuery.trim().toLowerCase();
       if (
-        label.textContent.toLowerCase().startsWith(searchQuery.toLowerCase())
+        label.textContent.toLowerCase().startsWith(q) ||
+        (q.length > 3 && label.textContent.toLowerCase().includes(q))
       ) {
         item.style.display = "";
         dynlist.style.display = "";
@@ -1421,6 +1423,6 @@ function tagSearchInit(topLevelParent) {
   };
   firstInit();
   setInterval(() => {
-   firstInit(); 
+    firstInit();
   }, 400);
 })();
