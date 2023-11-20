@@ -25,10 +25,18 @@ const contentListTextSelector = _tag("checkbox-label");
 // content list textbox ('input[type="checkbox"]')
 const constentListCheckboxSelector = itemsCheckboxSelector;
 
+const templates = {};
+
 // ------ codezzzzzzor
 function tagSearchInit(topLevelParent) {
-  let template = topLevelParent.querySelectorAll(tagSelector)[0];
-  jQuery(template).hide();
+  const templates = topLevelParent.querySelectorAll(tagSelector);
+  // find a template that isTemplate === true
+  let template = Array.from(templates).find((el) => el.isTemplate);
+  if (!template) {
+    template = templates[0];
+    template.isTemplate = true;
+    jQuery(template).hide();
+  }
 
   let checkboxes = topLevelParent.querySelectorAll(itemsCheckboxSelector);
   let search = topLevelParent.querySelectorAll(searchInputSelector)[0];
@@ -95,6 +103,7 @@ function tagSearchInit(topLevelParent) {
           if (textElement) {
             textElement.textContent = label.textContent;
           }
+          template.isTemplate = false;
           jQuery(clone).insertAfter(template);
 
           let items = topLevelParent.querySelectorAll(
@@ -1335,4 +1344,80 @@ function tagSearchInit(topLevelParent) {
       tagSearchInit(parent);
     });
   }, 400);
+
+  //let topLevelParents = document.querySelectorAll(_tag("parent-container"));
+  const firstInit = () => {
+    topLevelParents.forEach((topLevelParent) => {
+      let checkboxes = topLevelParent.querySelectorAll(itemsCheckboxSelector);
+      const templates = topLevelParent.querySelectorAll(tagSelector);
+      // find a template that isTemplate === true
+      let template = Array.from(templates).find((el) => el.isTemplate);
+      if (!template) {
+        template = templates[0];
+        template.isTemplate = true;
+        jQuery(template).hide();
+      }
+      checkboxes.forEach((checkbox) => {
+        if (checkbox.checked) {
+          let parentDynItem = checkbox.closest(".w-dyn-item");
+
+          if (parentDynItem.style.display === "none") {
+            return;
+          }
+          checkbox.checked = false;
+          parentDynItem.style.display = "none";
+
+          let label = checkbox.nextElementSibling;
+          const clone = jQuery(template).clone().show()[0];
+          let textElement = clone.querySelector(".active-checkbox_tag-text");
+          if (textElement) {
+            textElement.textContent = label.textContent;
+          }
+          jQuery(clone).insertAfter(template);
+          let imgElement = clone.querySelector(".active-checkbox_tag-remove");
+
+          if (imgElement) {
+            imgElement.addEventListener("click", function () {
+              let textElement = clone.querySelector(
+                ".active-checkbox_tag-text"
+              );
+              if (textElement) {
+                let dynItems = topLevelParent.querySelectorAll(
+                  ".w-dyn-items .w-dyn-item"
+                );
+
+                dynItems.forEach((item) => {
+                  let label = item.querySelector(".w-form-label");
+                  if (
+                    label &&
+                    label.textContent.trim() === textElement.textContent
+                  ) {
+                    // If found, unhide (show) the .w-dyn-item
+                    item.style.display = "";
+                    let checkbox = item.querySelector(
+                      constentListCheckboxSelector
+                    );
+                    if (checkbox) {
+                      checkbox.checked = false;
+                    }
+
+                    let checkboxInputDiv =
+                      item.querySelector(".w-checkbox-input");
+                    if (checkboxInputDiv) {
+                      checkboxInputDiv.classList.remove(
+                        "w--redirected-checked"
+                      );
+                    }
+                  }
+                });
+              }
+              clone.parentNode.removeChild(clone);
+              //doSearch(search.value);
+            });
+          }
+        }
+      });
+    });
+  };
+  firstInit();
 })();
