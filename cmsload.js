@@ -68,6 +68,7 @@ function tagSearchInit(topLevelParent) {
         // this is for the case when the label has multiple words
         label.textContent
           .toLowerCase()
+          .replaceAll(/,/g, " ")
           .split(" ")
           .some((word) => word.startsWith(q)) ||
         //label.textContent.toLowerCase().startsWith(q) ||
