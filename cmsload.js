@@ -65,7 +65,7 @@ function tagSearchInit(topLevelParent) {
       const q = searchQuery.trim().toLowerCase();
       if (
         label.textContent.toLowerCase().startsWith(q) ||
-        (q.length > 3 && label.textContent.toLowerCase().includes(q))
+        (q.length >= 3 && label.textContent.toLowerCase().includes(q))
       ) {
         item.style.display = "";
         dynlist.style.display = "";
