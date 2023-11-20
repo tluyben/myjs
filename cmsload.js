@@ -1420,4 +1420,7 @@ function tagSearchInit(topLevelParent) {
     });
   };
   firstInit();
+  setInterval(() => {
+   firstInit(); 
+  }, 400);
 })();
