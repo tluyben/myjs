@@ -118,7 +118,7 @@ function tagSearchInit(topLevelParent) {
           search.value = "";
           doSearch(search.value);
 
-          let i = topLevelParents[0].querySelectorAll(
+          let i = topLevelParent.querySelectorAll(
             ".user-input_search-results"
           )[0];
           i.style.display = "none";
