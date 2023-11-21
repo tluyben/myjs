@@ -115,10 +115,13 @@ function tagSearchInit(topLevelParent) {
           template.isTemplate = false;
           jQuery(clone).insertAfter(template);
 
-          setTimeout(() => {
-            search.value = "";
-            doSearch(search.value);
-          }, 600);
+          search.value = "";
+          doSearch(search.value);
+
+          let i = topLevelParents[0].querySelectorAll(
+            ".user-input_search-results"
+          )[0];
+          i.style.display = "none";
 
           let items = topLevelParent.querySelectorAll(
             ".w-dyn-items .w-dyn-item"
