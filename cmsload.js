@@ -36,6 +36,19 @@ function tagSearchInit(topLevelParent) {
     template = templates[0];
     template.isTemplate = true;
     jQuery(template).hide();
+
+    let i = topLevelParent.querySelectorAll(".user-input_search-results")[0];
+    let j = topLevelParent.querySelectorAll(".user-input_input-field")[0];
+    j.addEventListener("click", (ev) => {
+      i.style.display = "";
+      ev.stopPropagation();
+    });
+    i.style.display = "none";
+
+    let k = document.querySelectorAll(".page-wrapper")[0];
+    k.addEventListener("click", () => {
+      i.style.display = "none";
+    });
   }
 
   let checkboxes = topLevelParent.querySelectorAll(itemsCheckboxSelector);
