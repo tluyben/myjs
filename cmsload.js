@@ -149,7 +149,7 @@ function tagSearchInit(topLevelParent) {
           let imgElement = clone.querySelector(".active-checkbox_tag-remove");
 
           if (imgElement) {
-            imgElement.addEventListener("click", function () {
+            imgElement.addEventListener("click", function (ev) {
               let textElement = clone.querySelector(
                 ".active-checkbox_tag-text"
               );
@@ -185,6 +185,7 @@ function tagSearchInit(topLevelParent) {
               }
               clone.parentNode.removeChild(clone);
               doSearch(search.value);
+              ev.stopPropagation();
             });
           }
         }
