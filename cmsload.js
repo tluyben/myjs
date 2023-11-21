@@ -163,6 +163,7 @@ function tagSearchInit(topLevelParent) {
                 });
               }
               clone.parentNode.removeChild(clone);
+              search.value = "";
               doSearch(search.value);
             });
           }
