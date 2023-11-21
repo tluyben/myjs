@@ -115,6 +115,7 @@ function tagSearchInit(topLevelParent) {
           template.isTemplate = false;
           jQuery(clone).insertAfter(template);
           search.value = "";
+          doSearch(search.value);
 
           let items = topLevelParent.querySelectorAll(
             ".w-dyn-items .w-dyn-item"
