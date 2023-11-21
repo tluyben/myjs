@@ -114,6 +114,7 @@ function tagSearchInit(topLevelParent) {
           }
           template.isTemplate = false;
           jQuery(clone).insertAfter(template);
+          search.value = "";
 
           let items = topLevelParent.querySelectorAll(
             ".w-dyn-items .w-dyn-item"
@@ -163,7 +164,6 @@ function tagSearchInit(topLevelParent) {
                 });
               }
               clone.parentNode.removeChild(clone);
-              search.value = "";
               doSearch(search.value);
             });
           }
