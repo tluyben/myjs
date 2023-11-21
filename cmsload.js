@@ -114,8 +114,11 @@ function tagSearchInit(topLevelParent) {
           }
           template.isTemplate = false;
           jQuery(clone).insertAfter(template);
-          search.value = "";
-          doSearch(search.value);
+
+          setTimeout(() => {
+            search.value = "";
+            doSearch(search.value);
+          }, 600);
 
           let items = topLevelParent.querySelectorAll(
             ".w-dyn-items .w-dyn-item"
