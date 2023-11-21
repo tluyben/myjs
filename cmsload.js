@@ -30,6 +30,9 @@ const templates = {};
 // ------ codezzzzzzor
 function tagSearchInit(topLevelParent) {
   const templates = topLevelParent.querySelectorAll(tagSelector);
+
+  let search = topLevelParent.querySelectorAll(searchInputSelector)[0];
+
   // find a template that isTemplate === true
   let template = Array.from(templates).find((el) => el.isTemplate);
   if (!template) {
@@ -38,8 +41,8 @@ function tagSearchInit(topLevelParent) {
     jQuery(template).hide();
 
     let i = topLevelParent.querySelectorAll(".user-input_search-results")[0];
-    let j = topLevelParent.querySelectorAll(".user-input_input-field")[0];
-    j.addEventListener("click", (ev) => {
+    let j = topLevelParent.querySelectorAll(".user-input_input-field")[0]; // this is the entire box with tags
+    search.addEventListener("click", (ev) => {
       i.style.display = "";
       ev.stopPropagation();
     });
@@ -52,7 +55,6 @@ function tagSearchInit(topLevelParent) {
   }
 
   let checkboxes = topLevelParent.querySelectorAll(itemsCheckboxSelector);
-  let search = topLevelParent.querySelectorAll(searchInputSelector)[0];
   let dynlist = topLevelParent.querySelectorAll(topContentListSelector)[0];
 
   function doSearch(searchQuery) {
@@ -149,6 +151,9 @@ function tagSearchInit(topLevelParent) {
           let imgElement = clone.querySelector(".active-checkbox_tag-remove");
 
           if (imgElement) {
+            clone.addEventListener("click", function (ev) {
+              ev.stopPropagation();
+            });
             imgElement.addEventListener("click", function (ev) {
               let textElement = clone.querySelector(
                 ".active-checkbox_tag-text"
